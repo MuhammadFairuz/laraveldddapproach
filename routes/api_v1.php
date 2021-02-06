@@ -14,12 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:web')->get('/user', function (Request $request) {
-    return $request->user();
-});
-
 // Route::get('(endpoint)', '(NamaClassController)@(namaFunction)');
 
+// api/v1/users
 Route::group(
     [
         'prefix' => 'users',

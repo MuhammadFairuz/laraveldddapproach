@@ -39,6 +39,6 @@ class StringShouldBeContainsIn implements Rule
      */
     public function message()
     {
-        return 'Rojak name is not in name';
+        return ':value is not in';
     }
 }
