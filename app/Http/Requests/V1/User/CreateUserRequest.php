@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests\V1\User;
 
+use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Rules\StringShouldBeContainsIn;
+use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserRequest extends FormRequest
@@ -25,24 +27,20 @@ class CreateUserRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', new StringShouldBeContainsIn($this->email)],
-            'email' => 'required',
+            'name' => ['required', 'min:10'],
+            'email' => ['required',  new StringShouldBeContainsIn($this->name)],
             'password' => 'required'
         ];
     }
 
     /**
-     * Get the error messages for the defined validation rules.
+     * failed validation
      *
-     * @return array
+     * @param Validator $validator
+     * @return void
      */
-    public function messages()
+    public function failedValidation(Validator $validator)
     {
-        return [
-            'name.required' => 'A title is required',
-            'email.required' => 'A message is required',
-            'email.email' => 'A message is required',
-            'password.required' => 'A message is required',
-        ];
+        throw new HttpResponseException(respApiValidationError($validator->errors()));
     }
 }

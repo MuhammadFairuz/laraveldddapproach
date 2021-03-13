@@ -14,8 +14,6 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('(endpoint)', '(NamaClassController)@(namaFunction)');
-
 // api/v1/users
 Route::group(
     [

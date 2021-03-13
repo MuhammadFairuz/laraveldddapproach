@@ -4,7 +4,7 @@ namespace App\Http\Resources\V1\User;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class UserPagination extends JsonResource
+class UserDetail extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -15,11 +15,9 @@ class UserPagination extends JsonResource
     public function toArray($request)
     {
         return [
-            'items' => UserDetail::collection($this->items),
-            'total' => $this->total,
-            'perPage' => $this->perPage,
-            'currentPage' => $this->currentPage,
-            'totalPage' => $this->totalPage,
+            'name' => $this->name,
+            'password' => $this->password,
+            'email' => $this->email
         ];
     }
 }

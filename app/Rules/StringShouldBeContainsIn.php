@@ -19,6 +19,7 @@ class StringShouldBeContainsIn implements Rule
         $this->comparationString = $comparationString;
     }
 
+
     /**
      * Determine if the validation rule passes.
      *
@@ -29,6 +30,7 @@ class StringShouldBeContainsIn implements Rule
     public function passes($attribute, $value)
     {
         $comparationString = $this->comparationString;
+        return true;
         return (false !== strpos($comparationString, $value));
     }
 
@@ -39,6 +41,6 @@ class StringShouldBeContainsIn implements Rule
      */
     public function message()
     {
-        return ':value is not in';
+        return "this is not works";
     }
 }
