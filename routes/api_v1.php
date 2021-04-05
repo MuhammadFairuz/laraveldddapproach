@@ -25,6 +25,7 @@ Route::group(
     ],
     function () {
         Route::get('/', 'UserController@index');
+        Route::get('/{id}', 'UserController@show');
         Route::post('/', 'UserController@store');
     }
 );

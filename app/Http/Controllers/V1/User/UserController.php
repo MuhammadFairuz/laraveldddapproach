@@ -26,4 +26,11 @@ class UserController extends Controller
         $res = (new UserItem($user));
         return respApiJsonSuccess($res);
     }
+
+    public function show(UserGetApplication $userGetApplication, $id)
+    {
+        $user = $userGetApplication->userGetDetail($id);
+        $res = (new UserItem($user));
+        return respApiJsonSuccess($res);
+    }
 }
