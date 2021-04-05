@@ -30,7 +30,6 @@ class StringShouldBeContainsIn implements Rule
     public function passes($attribute, $value)
     {
         $comparationString = $this->comparationString;
-        return true;
         return (false !== strpos($comparationString, $value));
     }
 
