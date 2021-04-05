@@ -17,7 +17,18 @@ class UserController extends Controller
     public function index(Request $request, UserGetApplication $userGetApplication)
     {
         $search = $request->search ?? "";
-        $user = $userGetApplication->userGetList($search);
+        $pagination = $request->pagination == "true" || $request->pagination == "1";
+        $page = $request->page ?? 1;
+        $limit = $request->limit ?? 15;
+        $users = $userGetApplication->userGetList($search, $pagination, $page, $limit);
+
+        if ($pagination) {
+            $res = (new UserPagination($users));
+            return respApiJsonSuccess($res);
+        } else {
+            $res = UserItem::collection($users);
+            return respApiJsonSuccess($res, true);
+        }
     }
 
     public function store(CreateUserRequest $request, UserStoringApplication $userStoringApplication, UserGetApplication $userGetApplication)
