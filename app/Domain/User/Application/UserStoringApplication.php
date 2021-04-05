@@ -19,4 +19,15 @@ class UserStoringApplication
         $data = $request->toArray();
         return $this->repo->saveAndGetId($data);
     }
+
+    public function userUpdate($request)
+    {
+        $data = $request->toArray();
+        return $this->repo->saveAndGetId($data);
+    }
+
+    public function userDelete($id)
+    {
+        return $this->repo->delete($id);
+    }
 }

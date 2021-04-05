@@ -17,4 +17,8 @@ class UserGetApplication
     {
         return $this->repo->userFindById($id);
     }
+    public function userGetList($search, $pagination = false, $page = 1, $limit = 15)
+    {
+        return $this->repo->userFindWithOption($search, $pagination, $page, $limit);
+    }
 }

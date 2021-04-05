@@ -14,9 +14,10 @@ use stdClass;
 
 class UserController extends Controller
 {
-    public function index()
+    public function index(Request $request, UserGetApplication $userGetApplication)
     {
-        // TODO
+        $search = $request->search ?? "";
+        $user = $userGetApplication->userGetList($search);
     }
 
     public function store(CreateUserRequest $request, UserStoringApplication $userStoringApplication, UserGetApplication $userGetApplication)
@@ -32,5 +33,19 @@ class UserController extends Controller
         $user = $userGetApplication->userGetDetail($id);
         $res = (new UserItem($user));
         return respApiJsonSuccess($res);
+    }
+
+    public function update(CreateUserRequest $request, UserStoringApplication $userStoringApplication, UserGetApplication $userGetApplication, $id)
+    {
+        $id = $userStoringApplication->userUpdate($request);
+        $user = $userGetApplication->userGetDetail($id);
+        $res = (new UserItem($user));
+        return respApiJsonSuccess($res);
+    }
+
+    public function delete(UserStoringApplication $userStoringApplication, $id)
+    {
+        $userStoringApplication->userDelete($id);
+        return respApiJsonSuccess('Success Delete Data');
     }
 }

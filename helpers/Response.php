@@ -12,7 +12,7 @@ if (!function_exists('respApiJsonSuccess')) {
             $respData = array_merge($respData, [
                 'data' => $data
             ]);
-        } else {
+        } else if ($data) {
             $respData = array_merge($respData, [
                 'items' => $data
             ]);
