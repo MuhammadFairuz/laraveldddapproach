@@ -41,7 +41,7 @@ Route::group(
     function () {
         // Route List
         Route::get('/', 'AuthorController@index');
-        Route::get('search/{name}', 'AuthorController@search'); 
+        Route::get('search/{keyword}', 'AuthorController@search'); 
         Route::get('detail/{id}', 'AuthorController@show');
         Route::post('create/', 'AuthorController@store');
         Route::put('update/{id}','AuthorController@update');

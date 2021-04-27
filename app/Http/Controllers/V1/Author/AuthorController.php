@@ -23,9 +23,9 @@ class AuthorController extends Controller
     }
 
     //Search Author
-    public function search($name, AuthorGetApplication $authorGetApplication)
+    public function search(Request $request, AuthorGetApplication $authorGetApplication)
     {
-        $keyword = $name;
+        $keyword = $request->keyword ?? "";
         $author = $authorGetApplication->authorGetListWithOption($keyword);
         $res = AuthorItem::collection($author);
         return respApiJsonSuccess($res, true);
