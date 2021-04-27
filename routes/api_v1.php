@@ -31,3 +31,31 @@ Route::group(
         Route::delete('/{id}', 'UserController@delete');
     }
 );
+
+// api/v1/authors
+Route::group(
+    [
+        'prefix' => 'authors',
+        'namespace' => 'V1\Author',
+    ],
+    function () {
+        // Route List
+        Route::get('/', 'AuthorController@index');
+        Route::get('search/{name}', 'AuthorController@search'); 
+        Route::get('detail/{id}', 'AuthorController@show');
+        Route::post('create/', 'AuthorController@store');
+        Route::put('update/{id}','AuthorController@update');
+        Route::delete('delete/{id}', 'AuthorController@delete');
+    }
+);
+
+// api/v1/books
+Route::group(
+    [
+        'prefix' => 'books',
+        'namespace' => 'V1\Book',
+    ],
+    function () {
+        // Route List
+    }
+);
