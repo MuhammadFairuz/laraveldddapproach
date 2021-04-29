@@ -19,11 +19,6 @@ class CreateBooksTable extends Migration
             $table->longtext('synopsis');
             $table->enum('category',['pengetahuan', 'hiburan', 'seni']);
             $table->year('year');
-            $table->foreignId('author_id')
-                ->reference('id')
-                ->on('authors')
-                ->onDelete('cascade')
-                ->onUpdate('cascade');
             $table->timestamps();
         });
     }

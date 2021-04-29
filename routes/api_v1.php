@@ -57,5 +57,11 @@ Route::group(
     ],
     function () {
         // Route List
+        Route::get('/', 'BookController@index');
+        Route::get('search/{keyword}', 'BookController@search');
+        Route::get('detail/{id}', 'BookController@show');
+        Route::post('create/', 'BookController@store');
+        Route::put('update/{id}', 'BookController@update');
+        Route::delete('delete/{id}', 'BookController@delete');
     }
 );

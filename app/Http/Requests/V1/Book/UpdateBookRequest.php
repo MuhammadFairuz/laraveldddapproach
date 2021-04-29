@@ -1,13 +1,13 @@
 <?php
 
-namespace App\Http\Requests\V1\Author;
+namespace App\Http\Requests\V1\Book;
 
 use Illuminate\Http\Exceptions\HttpResponseException;
 use App\Rules\StringShouldBeContainsIn;
 use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateAuthorRequest extends FormRequest
+class UpdateBookRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -27,7 +27,11 @@ class CreateAuthorRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required'
+            'title' => 'required',
+            'synopsis' => 'required',
+            'category' => 'required',
+            'year' => 'required',
+            'author_ids' => 'required'
         ];
     }
 
