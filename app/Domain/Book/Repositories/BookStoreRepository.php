@@ -4,67 +4,60 @@ namespace App\Domain\Book\Repositories;
 
 use App\Domain\Author\Models\Author;
 use App\Domain\Book\Models\Book;
+use Illuminate\Database\Eloquent\Model;
 
 class BookStoreRepository
 {
     private $model;
 
-    public function __construct(Book $book, Author $author)
+    public function __construct(Book $book)
     {
-        $this->modelBook = $book;
-        $this->modelAuthor = $author;
+        $this->model = $book;
     }
 
     public function getModel()
     {
-        return $this->modelBook;
-        return $this->modelAuthor;
+        return $this->model;
     }
 
     public function save($data, $update = false)
     {
         if ($update) {
-            $this->modelBook->title = $data['title'] ?? $this->modelBook->title;
-            $this->modelBook->synopsis = $data['synopsis'] ?? $this->modelBook->synopsis;
-            $this->modelBook->category = $data['categoty'] ?? $this->modelBook->category;
-            $this->modelBook->year = $data['year'] ?? $this->modelBook->year;
+            $this->model->title = $data['title'] ?? $this->model->title;
+            $this->model->synopsis = $data['synopsis'] ?? $this->model->synopsis;
+            $this->model->category = $data['categoty'] ?? $this->model->category;
+            $this->model->year = $data['year'] ?? $this->model->year;
 
         } else {
-            $this->modelBook->title = $data['title'] ?? null;
-            $this->modelBook->synopsis = $data['synopsis'] ?? null;
-            $this->modelBook->category = $data['category'] ?? null;
-            $this->modelBook->year = $data['year'] ?? null;
+            $this->model->title = $data['title'] ?? null;
+            $this->model->synopsis = $data['synopsis'] ?? null;
+            $this->model->category = $data['category'] ?? null;
+            $this->model->year = $data['year'] ?? null;
             
         }
 
-        $this->modelBook->save();
+        $this->model->save();
 
-        $author = $this->modelAuthor->whereIn('id', $data['author_ids'])->get();
-        $this->modelBook->authors()->attach($author);
+        $author = $this->model->whereIn('id', $data['author_ids'])->get();
+        $this->model->authors()->attach($author);
 
     }
 
     public function saveAndGetId($data)
     {
         $this->save($data);
-        return $this->modelBook->id;
+        return $this->model->id;
     }
 
     public function updateAndGetId($id, $data)
     {
-        $this->modelBook = $this->modelBook->find($id);
+        $this->model = $this->model->find($id);
         $this->save($data);
-        return $this->modelBook->id;
+        return $this->model->id;
     }
 
     public function delete($id)
     {
-        // $author = $this->modelAuthor->find($id);
-        // $this->modelBook->authors()->detach($author);
-
-        // $this->modelBook->where('id', $id)->delete();
-        $this->modelBook->authors()->detach();
-        $this->modelAuthor->find($id)->delete();
-        $this->modelBook->delete();
+        return $this->model->where('id', $id)->forceDelete();
     }
 }
